@@ -18,17 +18,22 @@ import { useEffect, useState } from 'react';
 
 const theme = {
     global: {
-    colors: {
-        // brand: '#809bce',
-        // background: '#809bce',
-        placeholder: '#000000',
-        good: '#37eb34'
+        colors: {
+            brand: '#FFFFFF',
+            // background: '#809bce',
+            placeholder: '#000000',
+            good: '#37eb34'
+        },
+        font: {
+            size: '18px',
+            height: '20px',
+        },
     },
-    font: {
-        size: '18px',
-        height: '20px',
-    },
-    },
+    button: {
+        border: {
+            color: '#000000'
+        }
+    }
 };
 
 function decodeJwtResponse(token: string) {
@@ -83,7 +88,7 @@ function LandingPage() {
 
                         nano bank
                     </Text>
-                    <Button margin="medium" label="login / signup" alignSelf='end'/>
+                    <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
             </Header>
         </Layer>
         </Grommet>
