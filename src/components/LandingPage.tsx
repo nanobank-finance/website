@@ -113,10 +113,11 @@ function LandingPage() {
                         <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="end"><Twitter></Twitter></Button>
                         <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="end"><Reddit></Reddit></Button>
                         <Button tip="discord" margin={{horizontal: "small"}} alignSelf="end"><FaDiscord></FaDiscord></Button>
+                        <Box fill></Box>
                     </Box>
                     <Box fill></Box>
-                    <Box fill></Box>
                     <Box fill direction="row" as="footer">
+                        <Box fill></Box>
                         <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
                         <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
                         <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
