@@ -8,10 +8,11 @@ import {
     Spinner,
     Text,
     Button,
-    Header
+    Header,
+    Heading
 } from 'grommet';
 import '../App.css';
-import { StatusGood } from 'grommet-icons';
+import { Test, Money, Currency, Home } from 'grommet-icons';
 import { GoogleLogin } from '@react-oauth/google';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
@@ -47,28 +48,7 @@ function decodeJwtResponse(token: string) {
 };
 
 function LandingPage() {
-    var connected = true;
-    // const [socket, setSocket] = useState<Socket>();
-    // const [connected, setConnected] = useState<boolean>(() => {
-    //   return false;
-    // });
-
-    // const navigate = useNavigate();
-
-    // useEffect(() => {
-    //   connect();
-    // }, []);
-
-    // function connect() {
-    //   if(window.location.hostname === 'textmmo.com') {
-    //       setSocket(io('https://server.textmmo.com/', {
-    //           secure:true, transports: ['websocket']
-    //       }));
-    //   } else {
-    //       setSocket(io('http://localhost:8080/', {}));
-    //   }
-    // }
-
+    var filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
     return (
         <Grommet theme={theme}>
         <Layer full={true} modal={false} animate={false}>
@@ -90,6 +70,24 @@ function LandingPage() {
                     </Text>
                     <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
             </Header>
+            <Box direction="row">
+                <Box margin={{horizontal: "large"}} height="100%" width="100%" background={"url('./"+filename+"')"} alignSelf="start">
+                </Box>
+                <Box>
+                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                        <Test /> earn interest on your XNO
+                    </Text>
+                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                        <Home /> pay your mortgage in XNO
+                    </Text>
+                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                        <Money /> take out a personal loan in XNO
+                    </Text>
+                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                        <Currency /> buy XNO with USD
+                    </Text>
+                </Box>
+            </Box>
         </Layer>
         </Grommet>
     );
