@@ -7,6 +7,9 @@ import {
 import logo from './logo.svg';
 import './App.css';
 import LandingPage from "./components/LandingPage";
+import LoginPage from "./components/LoginPage";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
+import CreateAccountPage from "./components/CreateAccountPage";
 
 function App() {
   return (
@@ -14,7 +17,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* <Route path="/app" element={<Chat />} /> */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot" element={<ForgotPasswordPage />} />
+          <Route path="/start" element={<CreateAccountPage />} />
         </Routes>
       </Router>
     </>

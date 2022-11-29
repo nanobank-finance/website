@@ -53,17 +53,7 @@ const theme = {
 const SMALL_SCREEN_SIZE = 700;
 const MEDIUM_SCREEN_SIZE = 1000;
 
-function decodeJwtResponse(token: string) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-};
-
-function HeaderGroup(width: number) {
+function HeaderGroup(width: number, loginNavigation: () => void) {
     if(width < SMALL_SCREEN_SIZE) {
         return (<Header background="brand">
             <Text size="4xl" margin={{
@@ -99,12 +89,12 @@ function HeaderGroup(width: number) {
 
                 nano bank
             </Text>
-            <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
+            <Button onClick={loginNavigation} focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
         </Header>)
     }
 }
 
-function FooterGroup(width: number) {
+function FooterGroup(width: number, loginNavigation: () => void) {
     if(width < SMALL_SCREEN_SIZE) {
         return (
             <Box direction="column" margin="small">
@@ -119,7 +109,7 @@ function FooterGroup(width: number) {
                     <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
                     <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
                     <Box fill></Box>
-                    <Button focusIndicator={true} label="login / signup" alignSelf='end' margin="small"/>
+                    <Button onClick={loginNavigation} focusIndicator={true} label="login / signup" alignSelf='end' margin="small"/>
                 </Box>
                 <Box direction="row" margin="small">
                     <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
@@ -204,6 +194,10 @@ function ItemGrid(width: number) {
 function LandingPage() {
     const filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
     const [width, setWidth] = useState<number>(() => {return 0});
+    let navigate = useNavigate(); 
+    function loginNavigation() {
+        navigate(`login`);
+    }
 
     function getWindowWidth() {
         var ret = Math.max(
@@ -230,13 +224,13 @@ function LandingPage() {
     return (
         <Grommet theme={theme}>
         <Layer full={true} modal={false} animate={false}>
-            {HeaderGroup(width)}
+            {HeaderGroup(width, loginNavigation)}
             <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
             </Box>
             <Box>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
                 {ItemGrid(width)}
-                {FooterGroup(width)}
+                {FooterGroup(width, loginNavigation)}
             </Box>
         </Layer>
         </Grommet>
