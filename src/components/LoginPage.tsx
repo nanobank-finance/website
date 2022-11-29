@@ -10,7 +10,8 @@ import {
     Button,
     Header,
     Heading,
-    Footer
+    Footer,
+    TextInput
 } from 'grommet';
 import '../App.css';
 import { Test, Money, Currency, Home, Github, Twitter, Reddit, History, CloudUpload, Medium } from 'grommet-icons';
@@ -25,7 +26,7 @@ const theme = {
             brand: '#FFFFFF',
             // background: '#809bce',
             footer: 'lightgray',
-            placeholder: '#000000',
+            placeholder: 'gray',
             good: '#37eb34',
         },
         font: {
@@ -54,30 +55,8 @@ const SMALL_SCREEN_SIZE = 700;
 const MEDIUM_SCREEN_SIZE = 1000;
 
 function LoginPage() {
-    const filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
-    const [width, setWidth] = useState<number>(() => {return 0});
-
-    function getWindowWidth() {
-        var ret = Math.max(
-          document.documentElement.clientWidth,
-          window.innerWidth || 0
-        );
-        console.log(ret);
-        return ret;
-    }
-    
-    function onResize() {
-        window.requestAnimationFrame(() => {
-            setWidth(getWindowWidth());
-        });
-      }
-    
-    function componentWillMount() {
-        setWidth(getWindowWidth());
-    }
-
-    window.addEventListener("resize", onResize);
-    window.addEventListener("load", componentWillMount);
+    const [username, setUsername] = useState<string>(() => {return ""});
+    const [password, setPassword] = useState<string>(() => {return ""});
 
     return (
         <Grommet theme={theme}>
@@ -102,8 +81,36 @@ function LoginPage() {
             </Header>
 
             {/* body */}
-            <Box fill>
-                
+            <Box fill margin={{top:'xlarge'}}>
+                <Box direction="row" alignSelf='center'>
+                    <Box direction="column" alignSelf='center'>
+                        <Box margin='small' width="300" alignSelf='center'>
+                        <TextInput
+                            placeholder="username"
+                            value={username}
+                            onChange={event => setUsername(event.target.value)}
+                            />
+                        </Box>
+                        <Box margin='small' width="300" alignSelf='center'>
+                        <TextInput
+                            placeholder="password"
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            />
+                        </Box>
+                    </Box>
+                    <Box margin='small' width="300" alignSelf='center'>
+                        <Button label="submit" />
+                    </Box>
+                </Box>
+                <Box direction="row" alignSelf='center'>
+                    <Box margin='small' width="300" alignSelf='center'>
+                        <Button label="forgot password" />
+                    </Box>
+                    <Box margin='small' width="300" alignSelf='center'>
+                        <Button label="create an account" />
+                    </Box>
+                </Box>
             </Box>
 
             {/* footer */}
