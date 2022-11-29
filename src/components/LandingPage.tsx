@@ -98,14 +98,14 @@ function LandingPage() {
                 </Box>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
                 <Box fill direction="row">
-                    {ListItem("earn interest on your XNO", <Test />)}
-                    {ListItem("take out a loan in XNO", <Home />)}
+                    {ListItem("earn interest on your XNO", <Test size="large"/>)}
+                    {ListItem("take out a loan in XNO", <Home size="large"/>)}
                 </Box><Box fill direction="row">
-                    {ListItem("insure your XNO", <CloudUpload />)}
-                    {ListItem("schedule regular transfers", <History />)}
+                    {ListItem("insure your XNO", <CloudUpload size="large"/>)}
+                    {ListItem("schedule regular transfers", <History size="large"/>)}
                 </Box><Box fill direction="row">
-                    {ListItem("no surprise fees", <Money />)}
-                    {ListItem("buy XNO with USD", <Currency />)}
+                    {ListItem("no surprise fees", <Money size="large"/>)}
+                    {ListItem("buy XNO with USD", <Currency size="large"/>)}
                 </Box>
                 <Box direction="row" margin="small">
                     <Box fill direction="row" as="footer">
