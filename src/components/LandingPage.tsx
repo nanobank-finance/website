@@ -130,6 +130,11 @@ function LandingPage() {
                     {ListItem("no surprise fees", <Money size="large"/>)}
                     {ListItem("buy XNO with USD", <Currency size="large"/>)}
                 </Box>
+                <Box direction="row" margin={{horizontal:"medium", vertical:"medium"}}>
+                    <Box fill direction="row" as="footer">
+                    <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
+                    </Box>
+                </Box>
                 <Box direction="row" margin="small">
                     <Box fill direction="row" as="footer">
                         <Button tip="github" margin={{horizontal: "small"}} alignSelf="end"><Github></Github></Button>
@@ -139,7 +144,8 @@ function LandingPage() {
                         <Button tip="medium" margin={{horizontal: "small"}} alignSelf="end"><Medium></Medium></Button>
                         <Box fill></Box>
                     </Box>
-                    <Box fill></Box>
+                    <Box fill direction="row" as="footer">
+                    </Box>
                     <Box fill direction="row" as="footer">
                         <Box fill></Box>
                         <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
