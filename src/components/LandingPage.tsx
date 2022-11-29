@@ -50,6 +50,9 @@ const theme = {
     }
 };
 
+const SMALL_SCREEN_SIZE = 700;
+const MEDIUM_SCREEN_SIZE = 1000;
+
 function decodeJwtResponse(token: string) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -59,6 +62,89 @@ function decodeJwtResponse(token: string) {
 
     return JSON.parse(jsonPayload);
 };
+
+function HeaderGroup(width: number) {
+    if(width < SMALL_SCREEN_SIZE) {
+        return (<Header background="brand">
+            <Text size="4xl" margin={{
+                    left: "small",
+                }} alignSelf="start">
+
+                <Image 
+                    margin={{
+                        vertical: "medium",
+                        left: "large",
+                        right: "small"
+                    }}
+                    src="./favicon-32x32.png"
+                />
+
+                nano bank
+            </Text>
+        </Header>)
+    } else {
+        return (<Header background="brand">
+            <Text size="4xl" margin={{
+                    left: "small",
+                }} alignSelf="start">
+
+                <Image 
+                    margin={{
+                        vertical: "medium",
+                        left: "large",
+                        right: "small"
+                    }}
+                    src="./favicon-32x32.png"
+                />
+
+                nano bank
+            </Text>
+            <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
+        </Header>)
+    }
+}
+
+function FooterGroup(width: number) {
+    if(width < SMALL_SCREEN_SIZE) {
+        return (
+            <Box direction="column" margin="small">
+                <Box direction="row" margin={{vertical: "small"}}>
+                    <Button tip="github" margin={{horizontal: "small"}} alignSelf="center"><Github></Github></Button>
+                    <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="center"><Twitter></Twitter></Button>
+                    <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="center"><Reddit></Reddit></Button>
+                    <Button tip="discord" margin={{horizontal: "small"}} alignSelf="center"><FaDiscord></FaDiscord></Button>
+                    <Button tip="medium" margin={{horizontal: "small"}} alignSelf="center"><Medium></Medium></Button>
+                </Box><Box direction="row" margin={{vertical: "small"}}>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
+                    <Box fill></Box>
+                    <Button focusIndicator={true} label="login / signup" alignSelf='end' margin="small"/>
+                </Box>
+                <Box direction="row" margin="small">
+                    <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
+                </Box>
+            </Box>);
+    } else {
+        return (
+            <Box direction="column">
+                <Box direction="row" margin={{vertical: "small"}}>
+                    <Button tip="github" margin={{horizontal: "small"}} alignSelf="center"><Github></Github></Button>
+                    <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="center"><Twitter></Twitter></Button>
+                    <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="center"><Reddit></Reddit></Button>
+                    <Button tip="discord" margin={{horizontal: "small"}} alignSelf="center"><FaDiscord></FaDiscord></Button>
+                    <Button tip="medium" margin={{horizontal: "small"}} alignSelf="center"><Medium></Medium></Button>
+                </Box><Box direction="row" margin={{vertical: "small"}}>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
+                    <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
+                </Box>
+                <Box direction="row" margin="small">
+                    <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
+                </Box>
+            </Box>);
+    }
+}
 
 function ListItem(text: string, icon: any, vert_margin: string, horiz_margin: string) {
     return (
@@ -72,9 +158,9 @@ function ListItem(text: string, icon: any, vert_margin: string, horiz_margin: st
 }
 
 function ItemGrid(width: number) {
-    if(width < 600) {
+    if(width < SMALL_SCREEN_SIZE) {
         // small screen / phone size
-        return (<Box fill direction='column' overflow={{vertical: "scroll"}}>
+        return (<Box fill direction='column' margin={{bottom: "large"}} overflow={{vertical: "scroll"}}>
         <Box fill direction="row" margin={{vertical:"xlarge"}}>
             {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "large")}
         </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
@@ -89,9 +175,9 @@ function ItemGrid(width: number) {
             {ListItem("buy XNO with USD", <Currency size="large"/>, "large", "large")}
         </Box>
         </Box>);
-    } else if(width < 1000) {
+    } else if(width < MEDIUM_SCREEN_SIZE) {
         // medium screen
-        return (<Box fill direction='column' overflow={{vertical: "scroll"}}><Box fill direction="row">
+        return (<Box fill direction='column' margin={{bottom: "large"}} overflow={{vertical: "scroll"}}><Box fill direction="row">
             {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "large")}
             {ListItem("take out a loan in XNO", <Home size="large"/>, "large", "large")}
         </Box><Box fill direction="row">
@@ -103,7 +189,7 @@ function ItemGrid(width: number) {
         </Box></Box>);
     } else {
         // large screen
-        return (<Box fill direction='column' overflow={{vertical: "scroll"}}><Box fill direction="row">
+        return (<Box fill direction='column' margin={{bottom: "large"}} overflow={{vertical: "scroll"}}><Box fill direction="row">
         {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "small")}
         {ListItem("take out a loan in XNO", <Home size="large"/>, "large", "small")}
         {ListItem("insure your XNO", <CloudUpload size="large"/>, "large", "small")}
@@ -144,45 +230,13 @@ function LandingPage() {
     return (
         <Grommet theme={theme}>
         <Layer full={true} modal={false} animate={false}>
-            <Header background="brand">
-                    <Text size="4xl" margin={{
-                            left: "small",
-                        }} alignSelf="start">
-
-                        <Image 
-                            margin={{
-                                vertical: "medium",
-                                left: "large",
-                                right: "small"
-                            }}
-                            src="./favicon-32x32.png"
-                        />
-
-                        nano bank
-                    </Text>
-                    <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
-            </Header>
+            {HeaderGroup(width)}
             <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
             </Box>
             <Box overflow={{vertical: "scroll"}}>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
                 {ItemGrid(width)}
-                <Box direction="column">
-                    <Box direction="row" margin={{vertical: "small"}}>
-                        <Button tip="github" margin={{horizontal: "small"}} alignSelf="center"><Github></Github></Button>
-                        <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="center"><Twitter></Twitter></Button>
-                        <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="center"><Reddit></Reddit></Button>
-                        <Button tip="discord" margin={{horizontal: "small"}} alignSelf="center"><FaDiscord></FaDiscord></Button>
-                        <Button tip="medium" margin={{horizontal: "small"}} alignSelf="center"><Medium></Medium></Button>
-                    </Box><Box direction="row" margin={{vertical: "small"}}>
-                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
-                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
-                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
-                    </Box>
-                    <Box direction="row" margin="small">
-                        <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
-                    </Box>
-                </Box>
+                {FooterGroup(width)}
             </Box>
         </Layer>
         </Grommet>
