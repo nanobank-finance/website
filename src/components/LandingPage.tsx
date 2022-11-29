@@ -233,7 +233,7 @@ function LandingPage() {
             {HeaderGroup(width)}
             <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
             </Box>
-            <Box overflow={{vertical: "scroll"}}>
+            <Box>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
                 {ItemGrid(width)}
                 {FooterGroup(width)}
