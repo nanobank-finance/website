@@ -71,9 +71,50 @@ function ListItem(text: string, icon: any) {
     );
 }
 
+function ItemGrid(width: number) {
+    if(width < 600) {
+        return (<Box>
+        <Box fill direction="row">
+            {ListItem("earn interest on your XNO", <Test size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("take out a loan in XNO", <Home size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("insure your XNO", <CloudUpload size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("schedule regular transfers", <History size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("no surprise fees", <Money size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("buy XNO with USD", <Currency size="large"/>)}
+        </Box>
+        </Box>);
+    } else if(width < 1000) {
+        return (<Box><Box fill direction="row">
+            {ListItem("earn interest on your XNO", <Test size="large"/>)}
+            {ListItem("take out a loan in XNO", <Home size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("insure your XNO", <CloudUpload size="large"/>)}
+            {ListItem("schedule regular transfers", <History size="large"/>)}
+        </Box><Box fill direction="row">
+            {ListItem("no surprise fees", <Money size="large"/>)}
+            {ListItem("buy XNO with USD", <Currency size="large"/>)}
+        </Box></Box>);
+    } else {
+        return (<Box><Box fill direction="row">
+        {ListItem("earn interest on your XNO", <Test size="large"/>)}
+        {ListItem("take out a loan in XNO", <Home size="large"/>)}
+        {ListItem("insure your XNO", <CloudUpload size="large"/>)}
+        </Box><Box fill direction="row">
+        {ListItem("schedule regular transfers", <History size="large"/>)}
+        {ListItem("no surprise fees", <Money size="large"/>)}
+        {ListItem("buy XNO with USD", <Currency size="large"/>)}
+        </Box></Box>);
+    }
+}
+
 function LandingPage() {
     const filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
-    const [width, setWidth] = useState<number>();
+    const [width, setWidth] = useState<number>(() => {return 0});
 
     function getWindowWidth() {
         var ret = Math.max(
@@ -120,16 +161,7 @@ function LandingPage() {
                 <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
                 </Box>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
-                <Box fill direction="row">
-                    {ListItem("earn interest on your XNO", <Test size="large"/>)}
-                    {ListItem("take out a loan in XNO", <Home size="large"/>)}
-                </Box><Box fill direction="row">
-                    {ListItem("insure your XNO", <CloudUpload size="large"/>)}
-                    {ListItem("schedule regular transfers", <History size="large"/>)}
-                </Box><Box fill direction="row">
-                    {ListItem("no surprise fees", <Money size="large"/>)}
-                    {ListItem("buy XNO with USD", <Currency size="large"/>)}
-                </Box>
+                    {ItemGrid(width)}
                 <Box direction="row" margin={{horizontal:"medium", vertical:"medium"}}>
                     <Box fill direction="row" as="footer">
                     <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
