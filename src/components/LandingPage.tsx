@@ -72,7 +72,30 @@ function ListItem(text: string, icon: any) {
 }
 
 function LandingPage() {
-    var filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
+    const filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
+    const [width, setWidth] = useState<number>();
+
+    function getWindowWidth() {
+        var ret = Math.max(
+          document.documentElement.clientWidth,
+          window.innerWidth || 0
+        );
+        console.log(ret);
+        return ret;
+    }
+    
+    function onResize() {
+        window.requestAnimationFrame(() => {
+            setWidth(getWindowWidth());
+        });
+      }
+    
+    function componentWillMount() {
+        setWidth(getWindowWidth());
+    }
+
+    window.addEventListener("resize", onResize);
+
     return (
         <Grommet theme={theme}>
         <Layer full={true} modal={false} animate={false}>
