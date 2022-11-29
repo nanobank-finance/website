@@ -13,7 +13,7 @@ import {
     Footer
 } from 'grommet';
 import '../App.css';
-import { Test, Money, Currency, Home, Github, Twitter, Reddit, History, CloudUpload } from 'grommet-icons';
+import { Test, Money, Currency, Home, Github, Twitter, Reddit, History, CloudUpload, Medium } from 'grommet-icons';
 import { FaDiscord } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 import { Navigate, useNavigate } from "react-router-dom";
@@ -113,6 +113,7 @@ function LandingPage() {
                         <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="end"><Twitter></Twitter></Button>
                         <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="end"><Reddit></Reddit></Button>
                         <Button tip="discord" margin={{horizontal: "small"}} alignSelf="end"><FaDiscord></FaDiscord></Button>
+                        <Button tip="medium" margin={{horizontal: "small"}} alignSelf="end"><Medium></Medium></Button>
                         <Box fill></Box>
                     </Box>
                     <Box fill></Box>
