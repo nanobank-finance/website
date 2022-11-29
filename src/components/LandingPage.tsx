@@ -60,11 +60,11 @@ function decodeJwtResponse(token: string) {
     return JSON.parse(jsonPayload);
 };
 
-function ListItem(text: string, icon: any) {
+function ListItem(text: string, icon: any, vert_margin: string, horiz_margin: string) {
     return (
     <Box fill margin="large">
         <Box alignSelf="center">{icon}</Box>
-        <Text size="xl" margin={{vertical: "large", horizontal: "large"}} alignSelf="center">
+        <Text size="xl" margin={{vertical: vert_margin, horizontal: horiz_margin}} alignSelf="center">
             {text}
         </Text>
     </Box>
@@ -73,41 +73,44 @@ function ListItem(text: string, icon: any) {
 
 function ItemGrid(width: number) {
     if(width < 600) {
-        return (<Box>
-        <Box fill direction="row">
-            {ListItem("earn interest on your XNO", <Test size="large"/>)}
-        </Box><Box fill direction="row">
-            {ListItem("take out a loan in XNO", <Home size="large"/>)}
-        </Box><Box fill direction="row">
-            {ListItem("insure your XNO", <CloudUpload size="large"/>)}
-        </Box><Box fill direction="row">
-            {ListItem("schedule regular transfers", <History size="large"/>)}
-        </Box><Box fill direction="row">
-            {ListItem("no surprise fees", <Money size="large"/>)}
-        </Box><Box fill direction="row">
-            {ListItem("buy XNO with USD", <Currency size="large"/>)}
+        // small screen / phone size
+        return (<Box fill direction='column' overflow={{vertical: "scroll"}}>
+        <Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "large")}
+        </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("take out a loan in XNO", <Home size="large"/>, "large", "large")}
+        </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("insure your XNO", <CloudUpload size="large"/>, "large", "large")}
+        </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("schedule regular transfers", <History size="large"/>, "large", "large")}
+        </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("no surprise fees", <Money size="large"/>, "large", "large")}
+        </Box><Box fill direction="row" margin={{vertical:"xlarge"}}>
+            {ListItem("buy XNO with USD", <Currency size="large"/>, "large", "large")}
         </Box>
         </Box>);
     } else if(width < 1000) {
-        return (<Box><Box fill direction="row">
-            {ListItem("earn interest on your XNO", <Test size="large"/>)}
-            {ListItem("take out a loan in XNO", <Home size="large"/>)}
+        // medium screen
+        return (<Box fill direction='column' overflow={{vertical: "scroll"}}><Box fill direction="row">
+            {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "large")}
+            {ListItem("take out a loan in XNO", <Home size="large"/>, "large", "large")}
         </Box><Box fill direction="row">
-            {ListItem("insure your XNO", <CloudUpload size="large"/>)}
-            {ListItem("schedule regular transfers", <History size="large"/>)}
+            {ListItem("insure your XNO", <CloudUpload size="large"/>, "large", "large")}
+            {ListItem("schedule regular transfers", <History size="large"/>, "large", "large")}
         </Box><Box fill direction="row">
-            {ListItem("no surprise fees", <Money size="large"/>)}
-            {ListItem("buy XNO with USD", <Currency size="large"/>)}
+            {ListItem("no surprise fees", <Money size="large"/>, "large", "large")}
+            {ListItem("buy XNO with USD", <Currency size="large"/>, "large", "large")}
         </Box></Box>);
     } else {
-        return (<Box><Box fill direction="row">
-        {ListItem("earn interest on your XNO", <Test size="large"/>)}
-        {ListItem("take out a loan in XNO", <Home size="large"/>)}
-        {ListItem("insure your XNO", <CloudUpload size="large"/>)}
+        // large screen
+        return (<Box fill direction='column' overflow={{vertical: "scroll"}}><Box fill direction="row">
+        {ListItem("earn interest on your XNO", <Test size="large"/>, "large", "small")}
+        {ListItem("take out a loan in XNO", <Home size="large"/>, "large", "small")}
+        {ListItem("insure your XNO", <CloudUpload size="large"/>, "large", "small")}
         </Box><Box fill direction="row">
-        {ListItem("schedule regular transfers", <History size="large"/>)}
-        {ListItem("no surprise fees", <Money size="large"/>)}
-        {ListItem("buy XNO with USD", <Currency size="large"/>)}
+        {ListItem("schedule regular transfers", <History size="large"/>, "large", "small")}
+        {ListItem("no surprise fees", <Money size="large"/>, "large", "small")}
+        {ListItem("buy XNO with USD", <Currency size="large"/>, "large", "small")}
         </Box></Box>);
     }
 }
@@ -136,6 +139,7 @@ function LandingPage() {
     }
 
     window.addEventListener("resize", onResize);
+    window.addEventListener("load", componentWillMount);
 
     return (
         <Grommet theme={theme}>
@@ -158,33 +162,28 @@ function LandingPage() {
                     </Text>
                     <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
             </Header>
-                <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
-                </Box>
+            <Box direction='row' alignSelf="center" margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
+            </Box>
+            <Box overflow={{vertical: "scroll"}}>
                 <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
-                    {ItemGrid(width)}
-                <Box direction="row" margin={{horizontal:"medium", vertical:"medium"}}>
-                    <Box fill direction="row" as="footer">
-                    <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
+                {ItemGrid(width)}
+                <Box direction="column">
+                    <Box direction="row" margin={{vertical: "small"}}>
+                        <Button tip="github" margin={{horizontal: "small"}} alignSelf="center"><Github></Github></Button>
+                        <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="center"><Twitter></Twitter></Button>
+                        <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="center"><Reddit></Reddit></Button>
+                        <Button tip="discord" margin={{horizontal: "small"}} alignSelf="center"><FaDiscord></FaDiscord></Button>
+                        <Button tip="medium" margin={{horizontal: "small"}} alignSelf="center"><Medium></Medium></Button>
+                    </Box><Box direction="row" margin={{vertical: "small"}}>
+                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
+                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
+                        <Anchor color="#000000" alignSelf="center" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
+                    </Box>
+                    <Box direction="row" margin="small">
+                        <Anchor color="gray" alignSelf="center"><Text>Nano Bank LLC © {new Date().getFullYear()}</Text></Anchor>
                     </Box>
                 </Box>
-                <Box direction="row" margin="small">
-                    <Box fill direction="row" as="footer">
-                        <Button tip="github" margin={{horizontal: "small"}} alignSelf="end"><Github></Github></Button>
-                        <Button tip="twitter" margin={{horizontal: "small"}} alignSelf="end"><Twitter></Twitter></Button>
-                        <Button tip="reddit" margin={{horizontal: "small"}} alignSelf="end"><Reddit></Reddit></Button>
-                        <Button tip="discord" margin={{horizontal: "small"}} alignSelf="end"><FaDiscord></FaDiscord></Button>
-                        <Button tip="medium" margin={{horizontal: "small"}} alignSelf="end"><Medium></Medium></Button>
-                        <Box fill></Box>
-                    </Box>
-                    <Box fill direction="row" as="footer">
-                    </Box>
-                    <Box fill direction="row" as="footer">
-                        <Box fill></Box>
-                        <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>About</Text></Anchor>
-                        <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>Careers</Text></Anchor>
-                        <Anchor color="#000000" alignSelf="end" margin={{horizontal:"small"}}><Text>Legal</Text></Anchor>
-                    </Box>
-                </Box>
+            </Box>
         </Layer>
         </Grommet>
     );
