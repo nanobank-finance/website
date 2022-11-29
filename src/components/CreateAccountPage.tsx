@@ -54,19 +54,10 @@ const theme = {
 const SMALL_SCREEN_SIZE = 700;
 const MEDIUM_SCREEN_SIZE = 1000;
 
-function LoginPage() {
+function CreateAccountPage() {
     const [username, setUsername] = useState<string>(() => {return ""});
     const [password, setPassword] = useState<string>(() => {return ""});
     let submit_ready = false;
-    let navigate = useNavigate();
-
-    function forgotNavigation() {
-        navigate(`../forgot`);
-    }
-
-    function createNavigation() {
-        navigate(`../start`);
-    }
 
     return (
         <Grommet theme={theme}>
@@ -92,35 +83,7 @@ function LoginPage() {
 
             {/* body */}
             <Box fill margin={{top:'xlarge'}}>
-                <Box direction="row" alignSelf='center'>
-                    <Box direction="column" alignSelf='center'>
-                        <Box margin='small' width="300" alignSelf='center'>
-                        <TextInput
-                            placeholder="username"
-                            value={username}
-                            onChange={event => setUsername(event.target.value)}
-                            />
-                        </Box>
-                        <Box margin='small' width="300" alignSelf='center'>
-                        <TextInput
-                            placeholder="password"
-                            value={password}
-                            onChange={event => setPassword(event.target.value)}
-                            />
-                        </Box>
-                    </Box>
-                    <Box margin='small' width="300" alignSelf='center'>
-                        <Button primary disabled={!submit_ready} label="submit" type="submit"/>
-                    </Box>
-                </Box>
-                <Box direction="row" alignSelf='center'>
-                    <Box margin='small' width="300" alignSelf='center'>
-                        <Button onClick={forgotNavigation} secondary label="forgot password" />
-                    </Box>
-                    <Box margin='small' width="300" alignSelf='center'>
-                        <Button onClick={createNavigation} secondary label="create an account" />
-                    </Box>
-                </Box>
+                <Text>Todo</Text>
             </Box>
 
             {/* footer */}
@@ -145,4 +108,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default CreateAccountPage;
