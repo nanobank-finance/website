@@ -9,7 +9,8 @@ import {
     Text,
     Button,
     Header,
-    Heading
+    Heading,
+    Footer
 } from 'grommet';
 import '../App.css';
 import { Test, Money, Currency, Home } from 'grommet-icons';
@@ -23,7 +24,7 @@ const theme = {
             brand: '#FFFFFF',
             // background: '#809bce',
             placeholder: '#000000',
-            good: '#37eb34'
+            good: '#37eb34',
         },
         font: {
             size: '18px',
@@ -33,6 +34,16 @@ const theme = {
     button: {
         border: {
             color: '#000000'
+        }
+    },
+    text: {
+        skeleton: {
+            width: { width: '100px', min: '100px' },
+            margin: { vertical: 'xsmall' },
+            colors: {
+              dark: ['border', 'border'],
+              light: ['background-front', 'background-back'],
+            }
         }
     }
 };
@@ -70,23 +81,41 @@ function LandingPage() {
                     </Text>
                     <Button focusIndicator={true} margin="large" label="login / signup" alignSelf='end'/>
             </Header>
+                <Box direction='row' margin={{horizontal: "large"}} height="10%" width="90%" background={"url('./"+filename+"')"}>
+                </Box>
+                <Text size="2xl" margin="large" alignSelf="center">join a modern crypto bank</Text>
+                <Box direction="row">
+                    <Box fill>
+                        <Box margin="medium">
+                        <Box alignSelf="center"><Test /></Box>
+                        <Text size="xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                            earn interest on your XNO
+                        </Text>
+                        </Box>
+                        <Box margin="medium">
+                        <Box alignSelf="center"><Home /></Box>
+                        <Text size="xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                            pay your mortgage in XNO
+                        </Text>
+                        </Box>
+                    </Box>
+                    <Box fill>
+                        <Box margin="medium">
+                        <Box alignSelf="center"><Money /></Box>
+                        <Text size="xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                            take out a personal loan in XNO
+                        </Text>
+                        </Box>
+                        <Box margin="medium">
+                        <Box alignSelf="center"><Currency /></Box>
+                        <Text size="xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
+                            buy XNO with USD
+                        </Text>
+                        </Box>
+                    </Box>
+                </Box>
             <Box direction="row">
-                <Box margin={{horizontal: "large"}} height="100%" width="100%" background={"url('./"+filename+"')"} alignSelf="start">
-                </Box>
-                <Box>
-                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
-                        <Test /> earn interest on your XNO
-                    </Text>
-                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
-                        <Home /> pay your mortgage in XNO
-                    </Text>
-                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
-                        <Money /> take out a personal loan in XNO
-                    </Text>
-                    <Text size="2xl" margin={{vertical: "medium", horizontal: "medium"}} alignSelf="center">
-                        <Currency /> buy XNO with USD
-                    </Text>
-                </Box>
+                <Text></Text>
             </Box>
         </Layer>
         </Grommet>
