@@ -193,19 +193,17 @@ function ItemGrid(width: number) {
 
 function LandingPage() {
     const filename = "DALL·E 2022-11-28 18.50.29 - photorealistic nature.png";
-    const [width, setWidth] = useState<number>(() => {return 0});
+    const [width, setWidth] = useState<number>(() => {return getWindowWidth()});
     let navigate = useNavigate(); 
     function loginNavigation() {
         navigate(`login`);
     }
 
     function getWindowWidth() {
-        var ret = Math.max(
+        return Math.max(
           document.documentElement.clientWidth,
           window.innerWidth || 0
         );
-        console.log(ret);
-        return ret;
     }
     
     function onResize() {
