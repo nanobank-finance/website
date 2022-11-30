@@ -55,9 +55,7 @@ const SMALL_SCREEN_SIZE = 700;
 const MEDIUM_SCREEN_SIZE = 1000;
 
 function ForgotPasswordPage() {
-    const [username, setUsername] = useState<string>(() => {return ""});
-    const [password, setPassword] = useState<string>(() => {return ""});
-    let submit_ready = false;
+    const [email, setEmail] = useState<string>(() => {return ""});
 
     return (
         <Grommet theme={theme}>
@@ -83,7 +81,21 @@ function ForgotPasswordPage() {
 
             {/* body */}
             <Box fill margin={{top:'xlarge'}}>
-                <Text>Todo</Text>
+
+                <Text size="2xl" margin="large" alignSelf="center">Password Reset</Text>
+                <Box direction='row' margin='small' width="150" alignSelf='center'>
+                    <Box margin="small">
+                    <TextInput
+                        placeholder="email"
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                        />
+                    </Box>
+                    <Button primary disabled={!email} label="submit" type="submit"/>
+                </Box>
+                <Box margin='small' width="150" alignSelf='center'>
+                    <Text>An email will by sent to you by <b>system@nanobank.finance</b> with instructions on how to reset your password</Text>
+                </Box>
             </Box>
 
             {/* footer */}
