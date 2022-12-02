@@ -92,6 +92,7 @@ function LoginPage() {
 
             {/* body */}
             <Box fill margin={{top:'xlarge'}}>
+                <Text size="2xl" margin="large" alignSelf="center">Login</Text>
                 <Box direction="row" alignSelf='center'>
                     <Box direction="column" alignSelf='center'>
                         <Box margin='small' width="300" alignSelf='center'>
