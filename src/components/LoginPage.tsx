@@ -57,7 +57,7 @@ const MEDIUM_SCREEN_SIZE = 1000;
 function LoginPage() {
     const [username, setUsername] = useState<string>(() => {return ""});
     const [password, setPassword] = useState<string>(() => {return ""});
-    let submit_ready = false;
+    const [submitReady, setSubmitReady] = useState<Boolean>(() => {return false});
     let navigate = useNavigate();
 
     function forgotNavigation() {
@@ -67,6 +67,11 @@ function LoginPage() {
     function createNavigation() {
         navigate(`../start`);
     }
+
+    useEffect(() => {
+        setSubmitReady(Boolean(username) && Boolean(password));
+    }, [username, password]);
+    
 
     return (
         <Grommet theme={theme}>
@@ -111,7 +116,7 @@ function LoginPage() {
                         </Box>
                     </Box>
                     <Box margin='small' width="300" alignSelf='center'>
-                        <Button primary disabled={!submit_ready} label="submit" type="submit"/>
+                        <Button primary disabled={!submitReady} label="submit" type="submit"/>
                     </Box>
                 </Box>
                 <Box direction="row" alignSelf='center'>
