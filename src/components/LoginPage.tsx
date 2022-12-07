@@ -97,7 +97,7 @@ function LoginPage() {
                     <Box direction="column" alignSelf='center'>
                         <Box margin='small' width="300" alignSelf='center'>
                         <TextInput
-                            placeholder="username"
+                            placeholder="email"
                             value={username}
                             onChange={event => setUsername(event.target.value)}
                             />
@@ -106,6 +106,7 @@ function LoginPage() {
                         <TextInput
                             placeholder="password"
                             value={password}
+                            type="password"
                             onChange={event => setPassword(event.target.value)}
                             />
                         </Box>

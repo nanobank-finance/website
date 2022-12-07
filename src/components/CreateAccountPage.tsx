@@ -19,7 +19,22 @@ import { FaDiscord } from 'react-icons/fa';
 import { GoogleLogin } from '@react-oauth/google';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, Auth } from "firebase/auth";
 
+// https://stackoverflow.com/a/37484053
+// https://firebase.google.com/docs/web/setup#available-libraries
+const firebaseConfig = {
+    apiKey: "AIzaSyBQ8rb3jkIsusGKhGwGm-ri9VAjoof1OKA",
+    authDomain: "nanocryptobank.firebaseapp.com",
+    projectId: "nanocryptobank",
+    storageBucket: "nanocryptobank.appspot.com",
+    messagingSenderId: "950014241040",
+    appId: "1:950014241040:web:16e7f8fa0f59bcaf7b5d95",
+    measurementId: "G-H4F5Z43EKN"
+};
+const app = initializeApp(firebaseConfig);
+const auth: Auth = getAuth(app);
 const theme = {
     global: {
         colors: {
@@ -54,10 +69,37 @@ const theme = {
 const SMALL_SCREEN_SIZE = 700;
 const MEDIUM_SCREEN_SIZE = 1000;
 
+const error_message: any = {
+    "auth/email-already-in-use": "Email already in use",
+    "auth/invalid-email": "Error: Invalid Email",
+    "auth/wrong-password": "Incorrect password",
+    "auth/rejected-credential": "Incorrect password",
+    "auth/too-many-requests": "Too many attempts",
+    "auth/unverified-email": "Please verify your email",
+    "auth/weak-password": "Your password must be at least 6 characters, containing letters and numbers"
+}
+
+function createUser(email: string, password: string, setError: any) {
+    console.log(email);
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const token = auth.currentUser?.getIdToken();
+        console.log(token);
+    })
+    .catch((error) => {
+        setError(error_message[error.code] || error.code);
+    });
+}
+
 function CreateAccountPage() {
-    const [username, setUsername] = useState<string>(() => {return ""});
+    const [email, setEmail] = useState<string>(() => {return ""});
     const [password, setPassword] = useState<string>(() => {return ""});
-    let submit_ready = false;
+    const [submitReady, setSubmitReady] = useState<Boolean>(() => {return false});
+    const [error, setError] = useState<string>(() => {return ""})
+    
+    useEffect(() => {
+        setSubmitReady(Boolean(email) && Boolean(password));
+    }, [email, password]);
 
     return (
         <Grommet theme={theme}>
@@ -82,8 +124,33 @@ function CreateAccountPage() {
             </Header>
 
             {/* body */}
-            <Box fill margin={{top:'xlarge'}}>
-                <Text>Todo</Text>
+            <Box fill direction="column" margin={{top:'xlarge'}}>
+                <Text size="2xl" margin="large" alignSelf="center">Create your account</Text>
+                <Box direction="row" alignSelf='center'>
+                    <Box direction="column" alignSelf='center'>
+                        <Box margin='small' width="300" alignSelf='center'>
+                        <TextInput
+                            placeholder="email"
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                            />
+                        </Box>
+                        <Box margin='small' width="300" alignSelf='center'>
+                        <TextInput
+                            placeholder="password"
+                            type="password"
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            />
+                        </Box>
+                    </Box>
+                    <Box margin='small' width="300" alignSelf='center'>
+                        <Button primary disabled={!submitReady} onClick={event => createUser(email, password, setError)} label="submit" type="submit"/>
+                    </Box>
+                </Box>
+                <Box margin='small' width="300" alignSelf='center'>
+                    <Text>{error}</Text>
+                </Box>
             </Box>
 
             {/* footer */}
