@@ -20,7 +20,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, Auth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, Auth, sendEmailVerification } from "firebase/auth";
 
 // https://stackoverflow.com/a/37484053
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -85,6 +85,11 @@ function createUser(email: string, password: string, setError: any) {
     .then((userCredential) => {
         const token = auth.currentUser?.getIdToken();
         console.log(token);
+        // https://firebase.google.com/docs/reference/js/auth.user.md#user_interface
+        // https://firebase.google.com/docs/reference/js/auth.md#sendemailverification
+        // https://firebase.google.com/docs/reference/js/auth.md#applyactioncode
+        console.log("validated: " + userCredential.user.emailVerified);
+        sendEmailVerification(userCredential.user);
     })
     .catch((error) => {
         setError(error_message[error.code] || error.code);
